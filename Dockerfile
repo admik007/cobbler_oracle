@@ -6,20 +6,15 @@ ENV https_proxy http://IP.AD.DR.ES:3128
 ENV no_proxy IP.AD.DR.ES
 
 RUN curl https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm -o /root/epel-release-6-8.noarch.rpm && yum localinstall -y /root/epel-release-6-8.noarch.rpm && rm -f /root/epel-release-6-8.noarch.rpm
-RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz  -o /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
+RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz -o /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
+RUN curl http://yum.oracle.com/public-yum-ol6.repo - o /root/public-yum-ol6.repo
 
 RUN rm -f /etc/yum.repos.d/*.repo
-ADD OracleLinux-6.9-x86_64-0.repo /etc/yum.repos.d
-ADD OracleLinux-6.9-x86_64-1.repo /etc/yum.repos.d
-ADD OracleLinux-6.9-x86_64-2.repo /etc/yum.repos.d
-ADD OracleLinux-6.9-x86_64-3.repo /etc/yum.repos.d
-ADD OracleLinux-6.9-x86_64-4.repo /etc/yum.repos.d
-ADD OracleLinux-6.9-x86_64-5.repo /etc/yum.repos.d
-ADD OracleLinux-6.9-x86_64-6.repo /etc/yum.repos.d
+ADD public-yum-ol6.repo /etc/yum.repos.d
 ADD epel6.repo /etc/yum.repos.d
 ADD setup.sh /root/
 ADD OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root
-ADD script.sh /root/script.sh_original
+ADD script.sh /root/script.sh
 
 RUN yum -y install cobbler tftp-server httpd dhcp dnsmasq dnsmasq-utils telnet git wget make automake tcpdump nmap screen
 RUN mkdir /tftpboot
