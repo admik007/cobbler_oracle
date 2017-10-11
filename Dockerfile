@@ -1,4 +1,4 @@
-FROM oracle/ol-container-images:6.9
+FROM oraclelinux:6
 
 ENV ftp_proxy http://IP.AD.DR.ES:3128
 ENV http_proxy http://IP.AD.DR.ES:3128
