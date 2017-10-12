@@ -10,7 +10,6 @@ FROM oraclelinux:6
 #RUN curl http://yum.oracle.com/public-yum-ol6.repo - o /root/public-yum-ol6.repo
 
 RUN curl https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm -o epel-release-6-8.noarch.rpm && yum localinstall -y epel-release-6-8.noarch.rpm && rm -f epel-release-6-8.noarch.rpm
-RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz -o OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
 #RUN curl http://yum.oracle.com/public-yum-ol6.repo -o public-yum-ol6.repo
 
 #RUN rm -f /etc/yum.repos.d/*.repo
@@ -28,7 +27,8 @@ RUN sed -i 's/pxe_just_once: 0/pxe_just_once: 1/g' /etc/cobbler/settings
 RUN sed -i '10 i log-facility local7;' /etc/cobbler/dhcp.template
 RUN echo "*.debug,local6.none,local7.none                 /var/log/syslog" >> /etc/rsyslog.conf
 RUN echo "local7.debug                                    /var/log/dhcp/dhcpd.log" >> /etc/rsyslog.conf
-RUN mv OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz && tar -xzf OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
+RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz -o OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
+RUN mv OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz && cd /root && tar -xzf OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
 RUN cd /root/linux/rac/RHEL6/x86_64 && yum -y localinstall *.rpm && rm -rf /root/linux /root/docs
 
 VOLUME [ " /var/lib/cobbler " ]
