@@ -20,8 +20,7 @@ ADD setup.sh /root/
 #ADD OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root
 ADD script.sh /root/script.sh
 
-RUN mv OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz && tar -xzf OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
-RUN yum -y install cobbler tftp-server httpd dhcp dnsmasq dnsmasq-utils telnet git wget make automake tcpdump nmap screen mc
+RUN yum -y install cobbler tftp-server httpd dhcp dnsmasq dnsmasq-utils telnet git wget make automake tcpdump nmap screen mc tar
 RUN mkdir /tftpboot
 RUN sed -i 's/manage_dhcp: 0/manage_dhcp: 1/g' /etc/cobbler/settings
 RUN sed -i 's/manage_dns: 1/manage_dns: 0/g' /etc/cobbler/settings
@@ -29,6 +28,7 @@ RUN sed -i 's/pxe_just_once: 0/pxe_just_once: 1/g' /etc/cobbler/settings
 RUN sed -i '10 i log-facility local7;' /etc/cobbler/dhcp.template
 RUN echo "*.debug,local6.none,local7.none                 /var/log/syslog" >> /etc/rsyslog.conf
 RUN echo "local7.debug                                    /var/log/dhcp/dhcpd.log" >> /etc/rsyslog.conf
+RUN mv OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz && tar -xzf OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
 RUN cd /root/linux/rac/RHEL6/x86_64 && yum -y localinstall *.rpm && rm -rf /root/linux /root/docs
 
 VOLUME [ " /var/lib/cobbler " ]
