@@ -17,9 +17,10 @@ RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.
 #RUN mv public-yum-ol6.repo /etc/yum.repos.d
 #ADD epel6.repo /etc/yum.repos.d
 ADD setup.sh /root/
-ADD OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root
+#ADD OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root
 ADD script.sh /root/script.sh
 
+RUN mv OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz && tar -xzf OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
 RUN yum -y install cobbler tftp-server httpd dhcp dnsmasq dnsmasq-utils telnet git wget make automake tcpdump nmap screen mc
 RUN mkdir /tftpboot
 RUN sed -i 's/manage_dhcp: 0/manage_dhcp: 1/g' /etc/cobbler/settings
