@@ -5,12 +5,15 @@ FROM oraclelinux:6
 #ENV https_proxy http://IP.AD.DR.ES:3128
 #ENV no_proxy IP.AD.DR.ES
 
-RUN curl https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm -o /root/epel-release-6-8.noarch.rpm && yum localinstall -y /root/epel-release-6-8.noarch.rpm && rm -f /root/epel-release-6-8.noarch.rpm
-RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz -o /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
-RUN curl http://yum.oracle.com/public-yum-ol6.repo - o /root/public-yum-ol6.repo
+#RUN curl https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm -o /root/epel-release-6-8.noarch.rpm && yum localinstall -y /root/epel-release-6-8.noarch.rpm && rm -f /root/epel-release-6-8.noarch.rpm
+#RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz -o /root/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
+#RUN curl http://yum.oracle.com/public-yum-ol6.repo - o /root/public-yum-ol6.repo
 
-RUN rm -f /etc/yum.repos.d/*.repo
-ADD public-yum-ol6.repo /etc/yum.repos.d
+RUN curl https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && yum localinstall -y /root/epel-release-6-8.noarch.rpm && rm -f /root/epel-release-6-8.noarch.rpm
+RUN curl https://downloads.dell.com/FOLDER04161783M/1/OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz
+
+#RUN rm -f /etc/yum.repos.d/*.repo
+#ADD public-yum-ol6.repo /etc/yum.repos.d
 ADD epel6.repo /etc/yum.repos.d
 ADD setup.sh /root/
 ADD OM-MgmtStat-Dell-Web-LX-8.5.0-2372_A00.tar.gz /root
