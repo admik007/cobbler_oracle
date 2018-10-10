@@ -22,8 +22,8 @@ if [ ! -f /var/lib/cobbler/kickstarts/default.ks ]; then
  rsync -avHS /var/www/cobbler-default/ /var/www/cobbler/
 fi
 
-#echo "sed -i 's/127.0.0/`ip a | grep eth0 | grep global | awk {'print $2'} | cu                                                     t -d '.' -f1,2,3`/g' /etc/cobbler/settings" | bash
-echo "sed -i 's/192.168.1/`ip a | grep eth0 | grep global | awk {'print $2'} | c                                                     ut -d '.' -f1,2,3`/g' /etc/cobbler/dhcp.template" | bash
+#echo "sed -i 's/127.0.0/`ip a | grep eth0 | grep global | awk {'print $2'} | cut -d '.' -f1,2,3`/g' /etc/cobbler/settings" | bash
+echo "sed -i 's/192.168.1/`ip a | grep eth0 | grep global | awk {'print $2'} | cut -d '.' -f1,2,3`/g' /etc/cobbler/dhcp.template" | bash
 
 /etc/init.d/rsyslog restart
 /etc/init.d/cobblerd restart
